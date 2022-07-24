@@ -1,29 +1,26 @@
 {
-  "name": "cordovarduino",
-  "version": "0.0.10",
+  "name": "@cloudscapelabs/cordova-usb-serial",
+  "version": "1.0.0",
   "description": "Cordova plugin to communicate with the android USB serial port",
   "cordova": {
-    "id": "cordovarduino",
+    "id": "@cloudscapelabs/cordova-usb-serial",
     "platforms": [
-      "android",
-      "ubuntu"
+      "android"
     ]
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/xseignard/cordovarduino.git"
+    "url": "https://github.com/cloudscapelabs/cordova-usb-serial"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
   },
   "keywords": [
     "serial",
     "arduino",
     "ecosystem:cordova",
-    "cordova-android",
-    "cordova-ubuntu"
+    "cordova-android"
   ],
-  "author": "Xavier Seignard <xavier.seignard@gmail.com>",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/xseignard/cordovarduino/issues"
-  },
-  "homepage": "https://github.com/xseignard/cordovarduino#readme"
+  "homepage": "https://github.com/cloudscapelabs/cordova-usb-serial"
 }

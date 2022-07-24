@@ -1,4 +1,4 @@
-package fr.drangies.cordova.serial;
+package com.cloudscapelabs.usbserial;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -255,8 +255,8 @@ public class Serial extends CordovaPlugin {
 						callbackContext.error(e.getMessage());
 					}
 
-					Log.d(TAG, "Serial port opened!");
-					callbackContext.success("Serial port opened!");
+					Log.d(TAG, "com.cloudscapelabs.usbserial.Serial port opened!");
+					callbackContext.success("com.cloudscapelabs.usbserial.Serial port opened!");
 				}
 				else {
 					Log.d(TAG, "Cannot connect to the device!");
@@ -516,12 +516,12 @@ public class Serial extends CordovaPlugin {
 						// deal with error
 						Log.d(TAG, e.getMessage());
 					}
-					Log.d(TAG, "Serial port opened!");
+					Log.d(TAG, "com.cloudscapelabs.usbserial.Serial port opened!");
 				}
 				else {
 					Log.d(TAG, "Cannot connect to the device!");
 				}
-				Log.d(TAG, "Serial device: " + driver.getClass().getSimpleName());
+				Log.d(TAG, "com.cloudscapelabs.usbserial.Serial device: " + driver.getClass().getSimpleName());
 			}
 			
 			onDeviceStateChange();
