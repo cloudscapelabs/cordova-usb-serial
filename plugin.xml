@@ -10,25 +10,19 @@
     <keywords>serial,arduino</keywords>
 
     <!-- js module -->
-    <js-module src="www/serial.js" name="com.cloudscapelabs.usbserial.Serial">
-        <clobbers target="window.serial" />
+    <js-module src="www/serial.js" name="Serial">
+        <clobbers target="cordova.plugins.usbserial" />
     </js-module>
 
     <!-- android -->
     <platform name="android">
         <config-file target="res/xml/config.xml" parent="/*">
-            <feature name="com.cloudscapelabs.usbserial.Serial">
+            <feature name="Serial">
                 <param name="android-package" value="com.cloudscapelabs.usbserial.Serial"/>
             </feature>
         </config-file>
         <source-file src="src/android/com/cloudscapelabs/usbserial/Serial.java" target-dir="src/com/cloudscapelabs/usbserial" />
         <source-file src="src/android/com/cloudscapelabs/usbserial/UsbBroadcastReceiver.java" target-dir="src/com/cloudscapelabs/usbserial" />
         <framework src="src/android/plugin.gradle" custom="true" type="gradleReference"/>
-    </platform>
-
-    <!-- ubuntu -->
-    <platform name="ubuntu">
-        <header-file src="src/ubuntu/serial.h" />
-        <source-file src="src/ubuntu/serial.cpp" />
     </platform>
 </plugin>
