@@ -3,8 +3,8 @@
 <plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
     xmlns:android="http://schemas.android.com/apk/res/android"
     id="@cloudscapelabs/cordova-usb-serial"
-    version="2.0.1">
-    <name>Cordova USB com.cloudscapelabs.usbserial.Serial</name>
+    version="2.0.2">
+    <name>Cordova USB com.cloudscape.usbserial.Serial</name>
     <description>Cordova plugin to communicate with the android USB serial port</description>
     <license>MIT</license>
     <keywords>serial,arduino</keywords>
@@ -18,11 +18,12 @@
     <platform name="android">
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="Serial">
-                <param name="android-package" value="com.cloudscapelabs.usbserial.Serial"/>
+                <param name="android-package" value="com.cloudscape.usbserial.Serial"/>
             </feature>
         </config-file>
-        <source-file src="src/android/com/cloudscapelabs/usbserial/Serial.java" target-dir="src/com/cloudscapelabs/usbserial" />
-        <source-file src="src/android/com/cloudscapelabs/usbserial/UsbBroadcastReceiver.java" target-dir="src/com/cloudscapelabs/usbserial" />
+        <source-file src="src/android/com/cloudscape/usbserial/Serial.java" target-dir="src/com/cloudscape/usbserial" />
+        <source-file src="src/android/com/cloudscape/usbserial/UsbAttachedHandlerActivity.kt" target-dir="src/com/cloudscape/usbserial" />
+        <source-file src="src/android/com/cloudscape/usbserial/UsbBroadcastReceiver.java" target-dir="src/com/cloudscape/usbserial" />
         <framework src="src/android/plugin.gradle" custom="true" type="gradleReference"/>
     </platform>
 </plugin>

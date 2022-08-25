@@ -1,4 +1,4 @@
-package com.cloudscapelabs.usbserial;
+package com.cloudscape.usbserial;
 
 import org.apache.cordova.CallbackContext;
 
@@ -17,7 +17,7 @@ public class UsbBroadcastReceiver extends BroadcastReceiver {
 	// logging tag
 	private final String TAG = UsbBroadcastReceiver.class.getSimpleName();
 	// usb permission tag name
-	public static final String USB_PERMISSION ="com.cloudscapelabs.usbserial.USB_PERMISSION";
+	public static final String USB_PERMISSION ="com.cloudscape.usbserial.USB_PERMISSION";
 	// cordova callback context to notify the success/error to the cordova app
 	private CallbackContext callbackContext;
 	// cordova activity to use it to unregister this broadcast receiver

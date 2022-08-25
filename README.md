@@ -225,14 +225,14 @@ unsigned long previousMillis;
 int interval = 50;
 
 void setup() {
-    com.cloudscapelabs.usbserial.Serial.begin(9600);
+    com.cloudscape.usbserial.Serial.begin(9600);
     pinMode(POT, INPUT);
     pinMode(LED, OUTPUT);
 }
 
 void loop() {
-    if (com.cloudscapelabs.usbserial.Serial.available() > 0) {
-        char i = com.cloudscapelabs.usbserial.Serial.read();
+    if (com.cloudscape.usbserial.Serial.available() > 0) {
+        char i = com.cloudscape.usbserial.Serial.read();
         switch (i) {
             case '0':
                 digitalWrite(LED, LOW);
@@ -245,7 +245,7 @@ void loop() {
     if (millis() - previousMillis >= interval) {
         previousMillis = millis();
         int value = analogRead(POT);
-        com.cloudscapelabs.usbserial.Serial.println(value);
+        com.cloudscape.usbserial.Serial.println(value);
     }
 }
 ```

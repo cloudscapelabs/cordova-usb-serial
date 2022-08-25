@@ -1,4 +1,4 @@
-package com.cloudscapelabs.usbserial;
+package com.cloudscape.usbserial;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -69,10 +69,10 @@ public class Serial extends CordovaPlugin {
 	private boolean setDTR;
 	private boolean setRTS;
 	private boolean sleepOnPause;
-	
+
 	// callback that will be used to send back data to the cordova app
 	private CallbackContext readCallback;
-	
+
 	// I/O manager to handle new incoming serial data
 	private final ExecutorService mExecutor = Executors.newSingleThreadExecutor();
 	private SerialInputOutputManager mSerialIoManager;
@@ -169,18 +169,18 @@ public class Serial extends CordovaPlugin {
 						customTable.addProduct(vid, pid, CdcAcmSerialDriver.class);
 					}
 					else if (driver.equals("Cp21xxSerialDriver")) {
-                    	customTable.addProduct(vid, pid, Cp21xxSerialDriver.class);
+						customTable.addProduct(vid, pid, Cp21xxSerialDriver.class);
 					}
 					else if (driver.equals("ProlificSerialDriver")) {
-                    	customTable.addProduct(vid, pid, ProlificSerialDriver.class);
+						customTable.addProduct(vid, pid, ProlificSerialDriver.class);
 					}
 					else if (driver.equals("Ch34xSerialDriver")) {
 						customTable.addProduct(vid, pid, Ch34xSerialDriver.class);
 					}
-                    else {
-                        Log.d(TAG, "Unknown driver!");
-                        callbackContext.error("Unknown driver!");
-                    }
+					else {
+						Log.d(TAG, "Unknown driver!");
+						callbackContext.error("Unknown driver!");
+					}
 
 					prober = new UsbSerialProber(customTable);
 
@@ -224,6 +224,17 @@ public class Serial extends CordovaPlugin {
 	private void openSerial(final JSONObject opts, final CallbackContext callbackContext) {
 		cordova.getThreadPool().execute(new Runnable() {
 			public void run() {
+				if (driver == null) {
+					Log.d(TAG, "No driver is available.");
+					callbackContext.error("No driver is available");
+					return;
+				}
+				else if (manager == null) {
+					Log.d(TAG, "No manager is available.");
+					callbackContext.error("No manager is available");
+					return;
+				}
+
 				UsbDeviceConnection connection = manager.openDevice(driver.getDevice());
 				if (connection != null) {
 					// get first port and open it
@@ -255,8 +266,8 @@ public class Serial extends CordovaPlugin {
 						callbackContext.error(e.getMessage());
 					}
 
-					Log.d(TAG, "com.cloudscapelabs.usbserial.Serial port opened!");
-					callbackContext.success("com.cloudscapelabs.usbserial.Serial port opened!");
+					Log.d(TAG, "com.cloudscape.usbserial.Serial port opened!");
+					callbackContext.success("com.cloudscape.usbserial.Serial port opened!");
 				}
 				else {
 					Log.d(TAG, "Cannot connect to the device!");
@@ -353,7 +364,7 @@ public class Serial extends CordovaPlugin {
 			public void run() {
 				if (port == null) {
 					callbackContext.error("Reading a closed port.");
-				} 
+				}
 				else {
 					try {
 						int len = port.read(mReadBuffer.array(), READ_WAIT_MILLIS);
@@ -423,7 +434,7 @@ public class Serial extends CordovaPlugin {
 	 * Observe serial connection
 	 */
 	private void startIoManager() {
-		if (driver != null) {
+		if (driver != null && port != null) {
 			Log.i(TAG, "Starting io manager.");
 			mSerialIoManager = new SerialInputOutputManager(port, mListener);
 			mExecutor.submit(mSerialIoManager);
@@ -470,7 +481,7 @@ public class Serial extends CordovaPlugin {
 		});
 	}
 
-	/** 
+	/**
 	 * Paused activity handler
 	 * @see org.apache.cordova.CordovaPlugin#onPause(boolean)
 	 */
@@ -489,7 +500,7 @@ public class Serial extends CordovaPlugin {
 		}
 	}
 
-	
+
 	/**
 	 * Resumed activity handler
 	 * @see org.apache.cordova.CordovaPlugin#onResume(boolean)
@@ -500,7 +511,9 @@ public class Serial extends CordovaPlugin {
 		if (sleepOnPause) {
 			if (driver == null) {
 				Log.d(TAG, "No serial device to resume.");
-			} 
+			} else if (manager == null) {
+				Log.d(TAG, "No manager to resume.");
+			}
 			else {
 				UsbDeviceConnection connection = manager.openDevice(driver.getDevice());
 				if (connection != null) {
@@ -516,14 +529,14 @@ public class Serial extends CordovaPlugin {
 						// deal with error
 						Log.d(TAG, e.getMessage());
 					}
-					Log.d(TAG, "com.cloudscapelabs.usbserial.Serial port opened!");
+					Log.d(TAG, "com.cloudscape.usbserial.Serial port opened!");
 				}
 				else {
 					Log.d(TAG, "Cannot connect to the device!");
 				}
-				Log.d(TAG, "com.cloudscapelabs.usbserial.Serial device: " + driver.getClass().getSimpleName());
+				Log.d(TAG, "com.cloudscape.usbserial.Serial device: " + driver.getClass().getSimpleName());
 			}
-			
+
 			onDeviceStateChange();
 		}
 	}
